@@ -1,4 +1,5 @@
 import com.trendyol.shipment.Basket;
+import com.trendyol.shipment.BasketV2;
 import com.trendyol.shipment.Product;
 import com.trendyol.shipment.ShipmentSize;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,10 +21,11 @@ import static org.hamcrest.Matchers.equalTo;
 class BasketTest {
 
     private Basket basket;
+    private BasketV2 basketV2;
 
     @BeforeEach
     void setUp() {
-        basket = new Basket();
+        basketV2 = new BasketV2();
     }
 
     @ParameterizedTest
@@ -31,9 +33,9 @@ class BasketTest {
     void shouldGetOrderShipmentSizeAsExpected(List<ShipmentSize> shipmentSizesOfProducts, ShipmentSize orderShipmentSize) {
         final var products = shipmentSizesOfProducts.stream().map(Product::create).collect(Collectors.toList());
 
-        basket.setProducts(products);
+        basketV2.setProducts(products);
 
-        assertThat(basket.getShipmentSize(), equalTo(orderShipmentSize));
+        assertThat(basketV2.getShipmentSize(), equalTo(orderShipmentSize));
     }
 
     private static Stream<Arguments> shipmentSizeOfProductsAndBasketShipmentSize() {
